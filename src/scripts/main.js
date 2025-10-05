@@ -368,6 +368,8 @@ document.addEventListener('DOMContentLoaded', function () {
         td.textContent = person.died - person.born;
       } else if (field === 'century') {
         td.textContent = Math.ceil(person.died / 100);
+      } else if (field === 'sex') {
+        td.textContent = person.sex === 'm' ? 'Male' : 'Female';
       } else {
         td.textContent = person[field];
       }
