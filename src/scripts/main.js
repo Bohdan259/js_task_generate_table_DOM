@@ -355,57 +355,26 @@ const people = [
 ];
 
 document.addEventListener('DOMContentLoaded', function () {
+  const table = document.querySelector('.dashboard');
+  const fields = ['name', 'sex', 'born', 'died', 'age', 'century'];
+
   people.forEach((person) => {
-    const age = person.died - person.born;
-    const century = Math.ceil(person.died / 100);
-
-    person['age'] = age;
-    person['century'] = century;
-
-    const table = document.querySelector('table');
     const tr = document.createElement('tr');
 
-    table.appendChild(tr);
-
-    Object.entries(person).forEach(([key, value]) => {
+    fields.forEach((field) => {
       const td = document.createElement('td');
 
-      if (key === 'name') {
-        td.textContent = value;
-        tr.appendChild(td);
+      if (field === 'age') {
+        td.textContent = person.died - person.born;
+      } else if (field === 'century') {
+        td.textContent = Math.ceil(person.died / 100);
+      } else {
+        td.textContent = person[field];
       }
 
-      if (key === 'sex') {
-        let text = '';
-
-        if (value === 'm') {
-          text = 'Male';
-        } else {
-          text = 'Female';
-        }
-        td.textContent = text;
-        tr.appendChild(td);
-      }
-
-      if (key === 'born') {
-        td.textContent = value;
-        tr.appendChild(td);
-      }
-
-      if (key === 'died') {
-        td.textContent = value;
-        tr.appendChild(td);
-      }
-
-      if (key === 'age') {
-        td.textContent = value;
-        tr.appendChild(td);
-      }
-
-      if (key === 'century') {
-        td.textContent = value;
-        tr.appendChild(td);
-      }
+      tr.appendChild(td);
     });
+
+    table.appendChild(tr);
   });
 });
